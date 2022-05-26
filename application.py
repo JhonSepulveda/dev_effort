@@ -79,4 +79,16 @@ def add_estimaciones():
         }   
     return arr_data 
 
+
+# Esta entrada pertenece a la historia de usuario 
+#2- Cálculo de esfuerzo de desarrollo de software.
+def calculate_effort():
+    
+    #Se crea el cuerpo de este método, la lógica de implementación
+    # se creara en base a la investigación del proyecto de grado.
+    data = { "Numero de puntos" : "10",
+             "Horas" : "30"
+             }
+    return data 
+
                 

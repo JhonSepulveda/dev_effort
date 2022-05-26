@@ -7,7 +7,8 @@ app = Flask(__name__)
 def home():
     return 'Estimaciones home'
 
-
+# Esta entrada pertenece a la historia de usuario 
+    #3- Presentaciòn de resultados.
 @app.route('/estimaciones', methods=['GET'])
 def get_estimaciones():
     

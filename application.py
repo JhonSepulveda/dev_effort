@@ -1,4 +1,5 @@
 from flask import Flask, request
+import json
 
 app = Flask(__name__)
 
@@ -59,4 +60,23 @@ def get_estimaciones():
         
     return estimaciones
 
+            
+# Esta entrada pertenece a la historia de usuario 
+#1- Entrada de los datos.
+@app.route('/estimaciones', methods=['POST'])
+def add_estimaciones():    
+    arr_data = {
+          "requisito_historia": request.json['requisito_historia'],
+          "complejidad": request.json['complejidad'],
+          "Conocimiento": request.json['Conocimiento'],
+          "Complejidad_Pruebas": request.json['Complejidad_Pruebas'],
+          "Impacto_solucion": request.json['Impacto_solucion'],
+          "Reusabilidad": request.json['Reusabilidad'],
+          "Tasa_horas_dia": request.json['Tasa_horas_dia'],
+          "Tamanio_implementacion": request.json['Tamanio_implementacion'],
+          "Complejidad_investigacion": request.json['Complejidad_investigacion'],
+          "Tipo_implementacion": request.json['Tipo_implementacion']
+        }   
+    return arr_data 
 
+                

@@ -1,4 +1,8 @@
 from flask import Flask, request
+import requests
+from requests.auth import HTTPBasicAuth
+import logging
+
 
 app = Flask(__name__)
 
@@ -81,11 +85,24 @@ def add_estimaciones():
 #Taller 2- branch : api-rest-feature 
 @app.route('/api', methods=['GET'])
 def get_api_data():    
-    arr_data = {
-          "data": "test api"
-        }   
-    return arr_data 
-
+    try:
+        url = "http://api.open-notify.org/astros.json"
+        response = requests.get(url, auth=HTTPBasicAuth('user', 'pass'))  
+        logging.info('Json Api')
+    except requests.exceptions.HTTPError as errh:
+        #print(errh)
+        logging.error(errh)
+    except requests.exceptions.ConnectionError as errc:
+        print(errc)
+        logging.error(errc)
+    except requests.exceptions.Timeout as errt:
+        print(errt)
+        logging.error(errt)
+    except requests.exceptions.RequestException as err:
+        print(err)
+        logging.error(err)  
+        
+    return response.json()
 
 # Esta entrada pertenece a la historia de usuario 
 #2- Cálculo de esfuerzo de desarrollo de software.

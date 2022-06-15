@@ -1,5 +1,4 @@
 from flask import Flask, request
-import json
 
 app = Flask(__name__)
 
@@ -89,6 +88,9 @@ def calculate_effort():
     data = { "Numero de puntos" : "10",
              "Horas" : "30"
              }
-    return data 
+    return data
+
+
+
 
                 

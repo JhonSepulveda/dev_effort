@@ -2,14 +2,33 @@ from flask import Flask, request
 import requests
 from requests.auth import HTTPBasicAuth
 import logging
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,        # Capture info and above as breadcrumbs
+    event_level=logging.ERROR  # Send errors as events
+)
+
+sentry_sdk.init(
+    dsn="https://4723a1f9905343eea1583d9bf22ed64b@o1288684.ingest.sentry.io/6506103",
+    integrations=[
+        FlaskIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def home():
-    return 'Estimaciones home'
+def home():    
+    return 'Home'
 
 # Esta entrada pertenece a la historia de usuario 
     #3- Presentaciòn de resultados.
@@ -85,10 +104,14 @@ def add_estimaciones():
 #Taller 2- branch : api-rest-feature 
 @app.route('/api', methods=['GET'])
 def get_api_data():    
+    
+    logging.error("Jhon Sepulveda:: Error progamado", extra=dict(bar=43))
+    logging.exception("Jhon Sepulveda:: Excepcion")
+    
+    
     try:
         url = "http://api.open-notify.org/astros.json"
         response = requests.get(url, auth=HTTPBasicAuth('user', 'pass'))  
-        logging.info('Json Api')
     except requests.exceptions.HTTPError as errh:
         #print(errh)
         logging.error(errh)

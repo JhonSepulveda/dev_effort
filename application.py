@@ -78,6 +78,14 @@ def add_estimaciones():
         }   
     return arr_data 
 
+#Taller 2- branch : api-rest-feature 
+@app.route('/api', methods=['GET'])
+def get_api_data():    
+    arr_data = {
+          "data": "test api"
+        }   
+    return arr_data 
+
 
 # Esta entrada pertenece a la historia de usuario 
 #2- Cálculo de esfuerzo de desarrollo de software.
